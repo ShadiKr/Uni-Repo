@@ -123,44 +123,47 @@ def hangman(secretWord):
     print("You have",gLeft,"guesses left")
     
     " gLeft > 0 and "
-    while gLeft > 0 or isWordGuessed(secretWord, lettersGuessed) == False:
-        for j in range(len(secretWord)+1):
-            while isWordGuessed(secretWord, lettersGuessed) == False:
-                for i in range(attmpts):
-                    r = input("Please guess a letter ")
-                    if r not in lettersGuessed and r in secretWord:
-                        attmpts += 1
-                        print("You have",gLeft,"guesses left")
-                        lettersGuessed.append(r)
-                        getAvailableLetters(lettersGuessed)
-                        print("Good guess: ",end=" ")
-                        print(getGuessedWord(secretWord,lettersGuessed))
-                        print("------------")
-                        
-                    elif r in lettersGuessed:
-                        attmpts += 1
-                        print("You have",gLeft,"guesses left")
-                        print("Oops! You've already guessed that letter ",end=" ")
-                        print(getGuessedWord(secretWord,lettersGuessed))
-                        print("------------")
-                        
-                    elif r not in secretWord and r not in lettersGuessed:
-                        gLeft -= 1
-                        attmpts -= 1
-                        lettersGuessed.append(r)
-                        print("You have",gLeft,"guesses left")
-                        getAvailableLetters(lettersGuessed)
-                        print("Oops! That letter is not in my word ",end=" ")
-                        print(getGuessedWord(secretWord,lettersGuessed))
-                        print("------------")
-                    if isWordGuessed(secretWord, lettersGuessed) == True:
-                        break
+    while gLeft > 0 or isWordGuessed(secretWord, lettersGuessed) == False or attmpts > 0:
+        if gLeft > 0:
+            for j in range(len(secretWord)+1):
+                while isWordGuessed(secretWord, lettersGuessed) == False:
+                    for i in range(attmpts):
+                        r = input("Please guess a letter ")
+                        if r not in lettersGuessed and r in secretWord:
+                            attmpts += 1
+                            print("You have",gLeft,"guesses left")
+                            lettersGuessed.append(r)
+                            getAvailableLetters(lettersGuessed)
+                            print("Good guess: ",end=" ")
+                            print(getGuessedWord(secretWord,lettersGuessed))
+                            print("------------")
+                            
+                        elif r in lettersGuessed:
+                            attmpts += 1
+                            print("You have",gLeft,"guesses left")
+                            print("Oops! You've already guessed that letter ",end=" ")
+                            print(getGuessedWord(secretWord,lettersGuessed))
+                            print("------------")
+                            
+                        elif r not in secretWord and r not in lettersGuessed:
+                            gLeft -= 1
+                            attmpts -= 1
+                            lettersGuessed.append(r)
+                            print("You have",gLeft,"guesses left")
+                            getAvailableLetters(lettersGuessed)
+                            print("Oops! That letter is not in my word ",end=" ")
+                            print(getGuessedWord(secretWord,lettersGuessed))
+                            print("------------")
+                        if isWordGuessed(secretWord, lettersGuessed) == True:
+                            break
+                        if gLeft == 0:
+                            break
             else:
                 break
             break
         break
     print(" ")
-    if gLeft < 0:
+    if gLeft <= 0:
         print("Sorry, you ran out of guesses. The word was",secretWord)
     else:
         print("Congratulations you won!!")
