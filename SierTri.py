@@ -14,6 +14,8 @@ Created on Thu Oct 25 13:40:44 2018
 
 import turtle
 
+n = int(input("How many tries: "))
+
 def SierTriangle(n, l):
    if n == 0:  
        turtle.forward(l)
@@ -37,9 +39,7 @@ def SierTriangle(n, l):
        turtle.forward(l)
        turtle.left(120)
        SierTriangle(n-1, l)
-       
-     
-        
+
         
         
 '''    else:
@@ -54,5 +54,6 @@ def SierTriangle(n, l):
 turtle.speed(0)
         
 SierTriangle(3, 220)
+
 
 turtle.done()
